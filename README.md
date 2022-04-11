@@ -1,4 +1,4 @@
-# GEE Model
+# GEE Method
 
 The data (HEALTH.xlsx) are from a randomized, controlled trial among women of childbearing age to evaluate the effects of an educational intervention.   
 
