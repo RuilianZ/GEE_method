@@ -1,0 +1,10 @@
+---
+title: "GEE Model"
+author: "Roxy Zhang"
+date: "4/11/2022"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
