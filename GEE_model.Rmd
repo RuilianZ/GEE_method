@@ -8,6 +8,8 @@ output: github_document
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(readxl)
+library(gee)
+library(lme4)
 ```
 
 ```{r}
@@ -28,5 +30,35 @@ data_a = data %>%
 a = glm(health ~ txt, family = binomial, data = data_a)
 
 summary(a)
+```
+
+
+## b)
+
+```{r}
+data_b = data %>% 
+  mutate(baseline = ifelse(health == 1, 1, 0)) %>% 
+  filter(time != 1)
+
+b = gee(health ~ txt + time + as.factor(agegroup),
+    id = id,
+    data = data_b,
+    family = "binomial",
+    corstr = "unstructured",
+    scale.fix = TRUE,
+    scale.value = 1)
+
+summary(b)
+```
+
+
+## c)
+
+```{r}
+c = glmer(health ~ txt + time + as.factor(agegroup) + (1|id),
+          family = "binomial",
+          data = data_b)
+
+summary(c)
 ```
 
