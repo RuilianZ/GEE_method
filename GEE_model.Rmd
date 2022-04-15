@@ -7,4 +7,26 @@ output: github_document
 
 ```{r setup, include=FALSE}
 library(tidyverse)
+library(readxl)
 ```
+
+```{r}
+data = read_excel("HW8-HEALTH.xlsx") %>% 
+  janitor::clean_names() %>% 
+  mutate(health = ifelse(health == "Good", 1, 0)) # recode "Good" as 1, "Poor" as 0
+
+dim(data)
+summary(data)
+```
+
+## a)
+
+```{r}
+data_a = data %>% 
+  filter(time == 1)
+
+a = glm(health ~ txt, family = binomial, data = data_a)
+
+summary(a)
+```
+
